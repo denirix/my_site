@@ -9,3 +9,6 @@ def my_site1(request):
 
 def my_site2(request):
     return HttpResponse("Hello my blog2 part 2!")
+
+def index(request):
+    return render(request, "index.html")
