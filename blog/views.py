@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from .models import Post
+from .forms import PostForm
 
 def my_site(request):
     return HttpResponse("Hello my blog!")
@@ -21,3 +22,11 @@ def first_post(request):
 def second_post(request):
     post = Post.objects.get(id=2)
     return render(request, "second_post.html", {'second_post': post})
+
+def createpost(request):
+    if request.method == "POST":
+        new_post = PostForm(request.POST)
+        if new_post.is_valid():
+            new_post.save()
+    post_form = PostForm()
+    return render(request, 'create_post.html', {'post_form': post_form})
