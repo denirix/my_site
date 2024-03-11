@@ -1,0 +1,26 @@
+<html lang="en" data-bs-theme="dark">
+{% load bootstrap5 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+<style>
+  form {
+      margin-left: 20px;
+  }
+</style>
+
+  <head>
+    <title>Edit post</title>
+
+  </head>
+  <body>
+    <main>
+        <h1>Edit your post</h1>
+        <form method="post" style ="display: inline-grid;">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Submit</button>
+        </form>
+    </main>
+  </body>
+</html>

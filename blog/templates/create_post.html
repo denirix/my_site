@@ -1,11 +1,22 @@
-<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+{% load bootstrap5 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+<style>
+  form {
+      margin-left: 20px;
+  }
+</style>
+
   <head>
     <title>Createpost</title>
+
   </head>
   <body>
     <main>
         <h1>Create your post</h1>
-        <form action="/blog/createpost" method="POST">
+        <form action="/blog/createpost" method="POST" style ="display: inline-grid;">
             {%csrf_token%}
            {{post_form}}
             <input type="submit" value="Submit">

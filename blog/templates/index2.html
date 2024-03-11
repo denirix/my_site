@@ -184,8 +184,6 @@
   <div class="nav-scroller py-1 mb-3 border-bottom" bis_skin_checked="1">
     <nav class="nav nav-underline justify-content-start">
 
-      <a class="nav-item nav-link link-body-emphasis" href="/blog/first_post">Post 1</a>
-       <a class="nav-item nav-link link-body-emphasis" href="/blog/second_post">Post 2</a>
        <a class="nav-item nav-link link-body-emphasis" href="/blog/createpost">Create post</a>
 
     </nav>
@@ -195,15 +193,32 @@
 <main class="container">
   <div class="p-4 p-md-5 mb-4 rounded text-body-emphasis bg-body-secondary" bis_skin_checked="1">
     <div class="col-lg-6 px-0" bis_skin_checked="1">
-      <h1 class="display-4 fst-italic">My Posts</h1>
+      <h1 class="display-4 fst-italic">Cybersport News</h1>
 
 
     </div>
   </div>
 
 
-    {% block content %}
+  {% block content %}
   {% endblock %}
+
+  {% for post in posts %}
+  <div class="d-flex justify-content-between">
+      <div>
+        <h2><a href="{% url 'post_detail' post.id %}" class="text-decoration-none">{{ post.title }}</a></h2>
+          <p>{{ post.content }}</p>
+      </div>
+      <div>
+          <form action="{% url 'delete_post' post.id %}" method="post">
+              {% csrf_token %}
+              <button class="btn btn-danger" type="submit">Удалить</button>
+              <a href="{% url 'edit_post' post.id %}" class="btn btn-danger">Редактировать</a>
+          </form>
+      </div>
+  </div>
+{% endfor %}
+
 
 </main>
 
