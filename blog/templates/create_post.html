@@ -5,22 +5,47 @@
 
 <style>
   form {
-      margin-left: 20px;
+    margin-top: 20px;
+    width: 600px;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 5px;
+  }
+  label {
+    font-weight: bold;
+  }
+  input,
+  textarea {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  input[type="submit"] {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    float: right;
   }
 </style>
 
   <head>
-    <title>Createpost</title>
-
+    <title>Create post</title>
   </head>
   <body>
-    <main>
+    <main class="container">
         <h1>Create your post</h1>
-        <form action="/blog/createpost" method="POST" style ="display: inline-grid;">
-            {%csrf_token%}
-           {{post_form}}
-            <input type="submit" value="Submit">
-          </form>
+        <form action="/blog/createpost" method="POST">
+            {% csrf_token %}
+            {{ post_form.as_p }}
+            <input type="submit" value="Submit" class="btn btn-primary">
+        </form>
     </main>
   </body>
 </html>
