@@ -12,6 +12,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 
 def test_cel(request):
     my_task.delay()
@@ -99,9 +100,25 @@ def registration_view(request):
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
+        phone_number = request.POST['phone_number']
+        date_of_birth = request.POST['date_of_birth']
+        gender = request.POST['gender']
+
+        if User.objects.filter(username=username).exists():
+            messages.error(request, 'Пользователь с таким именем уже существует')
+            return render(request, 'registration.html')
+
         user = User.objects.create_user(username=username, password=password)
+        user.save()
+
+        user.phone_number = phone_number
+        user.date_of_birth = date_of_birth
+        user.gender = gender
+        user.save()
+
         login(request, user)
         return redirect('index2')
+
     return render(request, 'registration.html')
 
 def login_view(request):

@@ -2,6 +2,11 @@
 
 {% block content %}
 <h1>Регистрация</h1>
+{% if messages %}
+  {% for message in messages %}
+    <p class="text-danger">{{ message }}</p>
+  {% endfor %}
+{% endif %}
 <form method="post" action="{% url 'registration' %}" class="form">
   {% csrf_token %}
   <div class="form-group">
@@ -13,12 +18,12 @@
     <input type="password" id="password" name="password" class="form-control">
   </div>
   <div class="form-group">
-    <label for="phone">Номер телефона:</label>
-    <input type="text" id="phone" name="phone" class="form-control">
+    <label for="phone_number">Номер телефона:</label>
+    <input type="text" id="phone_number" name="phone_number" class="form-control">
   </div>
   <div class="form-group">
-    <label for="birthdate">Дата рождения:</label>
-    <input type="date" id="birthdate" name="birthdate" class="form-control">
+    <label for="date_of_birth">Дата рождения:</label>
+    <input type="date" id="date_of_birth" name="date_of_birth" class="form-control">
   </div>
   <div class="form-group">
     <label for="gender">Пол:</label>
@@ -26,8 +31,7 @@
       <option value="male">Мужской</option>
       <option value="female">Женский</option>
     </select>
-    <div class="form-group">
-      <button type="submit" class="btn btn-primary mt-3">Register</button>
   </div>
+  <button type="submit" class="btn btn-primary mt-3">Регистрация</button>
 </form>
 {% endblock %}
